@@ -23,11 +23,13 @@ $("input[type='button']").click(function (e) {
 
   /* save the data to database */
   var inputJson = {};
-  inputJson['name'] = 'joseph';
-  inputJson['checkin'] = '2021-11-15';
-  inputJson['checkout'] = '2021-11-20';
-  inputJson['guests'] = '5';
-  inputJson['rType'] = 'Grand Suite $289';
+  for (var i = 0; i < inputdata.length; i++) {
+    var n = inputdata[i]['name'];
+    var v = inputdata[i]['value'];
+    inputJson[n] = v;
+    console.log(n + ' ' + v);
+  }
+
   firebase.firestore().collection('hotelreservation').add(inputJson); //saves the data
 
   /* clear the entry */
@@ -43,7 +45,7 @@ array1.forEach(element => console.log(element));
 
 firebase
   .firestore()
-  .collection('hoteldata')
+  .collection('hotelreservation')
   .onSnapshot((querySnapshot) => {
     console.log(querySnapshot.size);
     querySnapshot.forEach((doc) => {
