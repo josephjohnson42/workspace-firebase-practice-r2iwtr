@@ -44,3 +44,28 @@ $('#signup-form').submit(function (e) {
     window.alert('Passwords must match');
   }
 });
+
+//using google instead
+$('#google').click(function () {
+  console.log('g selected');
+
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      console.log('Signed in');
+      /**window.location.href = 'Login.html'; **/
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+      console.log(credential);
+    });
+});
